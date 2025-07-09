@@ -9,7 +9,7 @@ const mode = ref<'main' | 'settings'>('main')
 </script>
 
 <template>
-  <div class="w-[calc(100vw - 400px)] h-full bg-[#212121] absolute top-0 right-0">
+  <div class="w-[calc(100vw-400px)] h-full bg-[#212121] absolute top-0 right-0">
     <Content v-if="mode === 'main'"/>
     <Settings v-else-if="mode === 'settings'"/>
     <Player/>
