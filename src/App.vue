@@ -14,12 +14,12 @@ onMounted(() => {
       .then(() => {
         callApi({endpoint: 'me'}).then(response => {
           userStore.setUser(response);
+          console.log(response)
+          callApi({endpoint: 'me/playlists', fetchAll: true}).then(response => {
+            spotifyStore.setPlaylists(response.items, userStore.userId);
+            console.log(userStore.userId);
+          });
         });
-        callApi({endpoint: 'me/playlists', fetchAll: true}).then(response => {
-          spotifyStore.setPlaylists(response.items);
-          console.log(JSON.parse(JSON.stringify(spotifyStore.getAllPlaylists(''))));
-        });
-
       })
       .catch(error => {
         console.error("Error during onLoad:", error);

@@ -72,8 +72,7 @@ function saveCurrentPlaylist() {
               length (in seconds): longer than <input type="text" v-model="playlistFilters.length.longer" style="background-color: transparent; border: 1px solid white; border-radius: 4px;"> shorter then <input type="text" v-model="playlistFilters.length.shorter" style="background-color: transparent; border: 1px solid white; border-radius: 4px;"><br>
             </div>
           </div>
-
-          <div id="playlistEditorButtons">
+          <!-- <div id="playlistEditorButtons">
             <div id="addplaylistPopup" :class="addSelectionOpen? '' : 'invisible'">
               <div v-for="list in allPlaylists" @click="addSelection(list.id)">
                 {{ list.name }}
@@ -82,7 +81,7 @@ function saveCurrentPlaylist() {
             <button @click="addSelectionOpen = !addSelectionOpen" class="playlistEditorButtonsBtns clickable" :style="addSelectionOpen? 'border-color: var(--accentGreen)': ''">add Selection to other Playlist</button>
             <button @click="deleteSelection()" class="playlistEditorButtonsBtns clickable">delete Selection</button>
             <button id="saveBtnPlaylistEditor" @click="saveCurrentPlaylist()" class="clickable playlistEditorButtonsBtns">save Selection</button>
-          </div>
+          </div> -->
         </div>
 
 
@@ -95,8 +94,8 @@ function saveCurrentPlaylist() {
 
         <div id="PlatlistEditorSectionDevider"></div>
 
-        <div id="PlatlistEditorLowerSection">
-          <div class="platlistEditorLowerSectionContainer" style="padding-bottom: 15px; position: fixed; background: linear-gradient(180deg, var(--firstElementBackground) 40%, rgba(255, 0, 0, 0) 100%);">
+        <div class="overflow-x-hidden overflow-y-auto h-[calc(100vh-110px-200px)] w-full" >
+          <div class="flex-nowrap flex" style="padding-bottom: 15px; position: fixed; background: linear-gradient(180deg,#212121 40%, rgba(255, 0, 0, 0) 100%);">
             <div class="platlistEditorLowerSectionContainerLine playlistLineLong" style="color: var(--accentGreen); font-weight: bold;">Name <p v-if="playlistFilterOptions == 'name_a'" @click="playlistFilterOptions = 'name_d'" class="clickable">ʌ</p><p v-else-if="playlistFilterOptions == 'name_d'" @click="playlistFilterOptions = ''" class="clickable" >v</p><p v-else @click="playlistFilterOptions = 'name_a'" class="clickable">-</p> </div>
             <div class="platlistEditorLowerSectionContainerLine playlistLineLong" style="color: var(--accentGreen); font-weight: bold;">Album <p v-if="playlistFilterOptions == 'album_a'" @click="playlistFilterOptions = 'album_d'" class="clickable">ʌ</p><p v-else-if="playlistFilterOptions == 'album_d'" @click="playlistFilterOptions = ''" class="clickable">v</p><p v-else @click="playlistFilterOptions = 'album_a'" class="clickable">-</p> </div>
             <div class="platlistEditorLowerSectionContainerLine playlistLineMediumLong" style="color: var(--accentGreen); font-weight: bold;">Artist <p v-if="playlistFilterOptions == 'artist_a'" @click="playlistFilterOptions = 'artist_d'" class="clickable">ʌ</p><p v-else-if="playlistFilterOptions == 'artist_d'" @click="playlistFilterOptions = ''" class="clickable">v</p><p v-else @click="playlistFilterOptions = 'artist_a'" class="clickable">-</p> </div>
@@ -106,8 +105,8 @@ function saveCurrentPlaylist() {
             <div class="platlistEditorLowerSectionContainerLine playlistLineShort" style="color: var(--accentGreen); font-weight: bold;">Random <input type="checkbox"  v-model="playlistSortedRandom" class="PlaylistEditSortingBox clickable" @change="playlistSortedRandom ? playlistFilterOptions = 'random' : playlistFilterOptions = ''" ></div>
             <div class="platlistEditorLowerSectionContainerLine playlistLineShort clickable" style="color: var(--accentGreen); font-weight: bold; text-decoration: underline;" @click="FilterOpen = true">Filter</div>
           </div>
-          <div style="margin-bottom: 40px;"></div>
-          <div v-for="songs in currentPlaylist?.tracks" class="platlistEditorLowerSectionContainer">
+          <div style="margin-bottom: 60px;"></div>
+          <div v-for="songs in currentPlaylist?.tracks" class="flex flex-nowrap">
             <div class="platlistEditorLowerSectionContainerLine playlistLineLong" style="cursor: pointer;" @click="AddToQue(songs.track.uri)"> {{ songs.track.name }} </div>
             <div class="platlistEditorLowerSectionContainerLine playlistLineLong"> {{ songs.track.album.name }} </div>
             <div class="platlistEditorLowerSectionContainerLine playlistLineMediumLong"> {{ songs.track.artists[0].name }} </div>
@@ -123,5 +122,26 @@ function saveCurrentPlaylist() {
 </template>
 
 <style scoped>
+.platlistEditorLowerSectionContainerLine{
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 0 6px 0;
+}
+.playlistLineLong{
+  width: 355px;
+}
+
+.playlistLineShort{
+  width: 95px;
+}
+
+.playlistLineMediumLong{
+  width: 220px;
+  padding: 0 5px;
+}
+
+.playlistLineMedium{
+  width: 160px;
+}
 
 </style>

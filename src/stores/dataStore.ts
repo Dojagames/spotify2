@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia';
 import { callApi } from '@/composables/api';
 
-
-
 export const useSpotifyStore = defineStore('spotify', {
   state: () => ({
     playlists: {} as Record<string, any>,
@@ -13,12 +11,16 @@ export const useSpotifyStore = defineStore('spotify', {
     loadedPlaylists: {} as Record<string, { tracks: any[], timestamp: number }>
   }),
   actions: {
-    setPlaylists(playlists: any[]) {
+    setPlaylists(playlists: any[], userId: string) {
       playlists.forEach(playlist => {
-        this.playlists[playlist.id] = playlist;
-        if (!this.playlistOrder.includes(playlist.id)) {
-          this.playlistOrder.push(playlist.id);
+        console.log(playlist.owner.id, userId)
+        if(userId && playlist.owner.id === userId) {
+          this.playlists[playlist.id] = playlist;
+          if (!this.playlistOrder.includes(playlist.id)) {
+            this.playlistOrder.push(playlist.id);
+          }
         }
+
       });
     },
     setTracks(tracks: any[]) {
