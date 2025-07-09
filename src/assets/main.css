@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+body{
+  margin: 0;
+  background-color: #121212;
+}
+
+* {
+  font-family: 'Abel', sans-serif;
+  color: white;
+}
+
+h1, h2{
+  margin: 0;
+}
